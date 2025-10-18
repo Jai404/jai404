@@ -879,8 +879,27 @@
             font-weight: 500;
         }
 
-        .modal__close {
-            min-width: 160px;
+        .modal__close-x {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            z-index: 2001;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .modal__close-x:hover {
+            color: #000;
         }
 
         @media (max-width: 768px) {
@@ -1204,6 +1223,7 @@ Everything you need for the city, and nothing that slows you down.</p>
 
     <div class="modal" id="foundersModal">
         <div class="modal__content">
+            <button class="modal__close-x" id="modalCloseX" aria-label="Close modal">×</button>
             <div class="modal__body">
                 <p>Dear Riders,</p>
                 <p>We started Analog Motion in 2018 with a simple goal: to make beautiful, attainable eBikes. With no prior experience in the bike industry, we spent years hustling through evenings and weekends — building prototypes, establishing a supply chain, and shaping a dream.</p>
@@ -1212,7 +1232,6 @@ Everything you need for the city, and nothing that slows you down.</p>
                 <p>To everyone who believed in us, rode our bikes, and shared in the journey — thank you. We would never have made it as far as we did without your support.</p>
                 <p>With gratitude,<br>Nav & Jack</p>
             </div>
-            <button class="cta-button primary modal__close">Close</button>
         </div>
     </div>
 
@@ -1266,7 +1285,7 @@ Everything you need for the city, and nothing that slows you down.</p>
             const openModalBtn = document.querySelector('a[href="#founders"]');
             console.log('Open button:', openModalBtn);
             
-            const closeModalBtn = modal.querySelector('.modal__close');
+            const closeModalBtn = modal.querySelector('.modal__close-x');
             console.log('Close button:', closeModalBtn);
 
             // Update the href to be more specific
