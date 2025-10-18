@@ -56,6 +56,23 @@
             color: #333;
         }
 
+        @media (max-width: 768px) {
+            body {
+                background: #f9f9f9;
+            }
+            
+            .community-section {
+                background: #f9f9f9;
+                margin-top: -32px;
+                padding-top: 0;
+            }
+            
+            .community-section__title {
+                margin: 0 2rem 1.5rem 2rem;
+                padding-top: 0;
+            }
+        }
+
         /* Link styles for body text */
         a {
             color: #666;
@@ -244,6 +261,15 @@
 
         /* Mobile navigation styles */
         @media (max-width: 768px) {
+            header {
+                background: transparent;
+                display: block;
+            }
+
+            header.scrolled {
+                background: white;
+            }
+
             .hamburger {
                 display: flex;
                 position: absolute;
@@ -590,6 +616,7 @@
             width: 33.33%;
             height: 64vh;
             overflow: hidden;
+            border-radius: 5px;
         }
 
         .content-block__media img,
@@ -597,9 +624,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 5px;
         }
 
         @media (max-width: 768px) {
+            .content-block-wrapper {
+                display: block;
+            }
+            
             .content-block,
             .content-block--reverse {
                 flex-direction: column;
@@ -674,6 +706,7 @@
             flex-direction: column;
             padding: 2rem;
             height: 100%;
+            border-radius: 5px;
         }
 
         .feature-card__content {
@@ -691,12 +724,14 @@
             aspect-ratio: 4/3;
             overflow: hidden;
             margin: -2rem -2rem 2rem -2rem;
+            border-radius: 5px 5px 0 0;
         }
 
         .feature-card__image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 5px 5px 0 0;
         }
 
         .feature-card__title {
@@ -741,6 +776,10 @@
         }
 
         @media (max-width: 768px) {
+            .features {
+                display: block;
+            }
+            
             .features__title {
                 font-size: 2rem;
             }
@@ -828,33 +867,46 @@
             color: #333;
         }
 
-        .video-container {
+        .video {
             position: relative;
             width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            max-width: 1200px;
+            margin: 2rem auto;
+            aspect-ratio: 16/9;
+            border-radius: 5px;
             overflow: hidden;
-            border-radius: 1px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
         }
 
-        .video-container iframe {
+        .video iframe {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            border-radius: 1px;
+            border: 0;
         }
 
         @media (max-width: 768px) {
             .video-section {
-                padding: 4rem 2rem;
+                display: block;
+                padding: 1rem 2rem;
+                background: #f9f9f9;
+                margin-bottom: 0;
+            }
+            
+            .video-section__inner {
+                padding: 0;
+                margin: 0;
             }
             
             .video-section__title {
                 font-size: 2rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
+                padding: 0;
+            }
+
+            .video {
+                margin: 0.5rem auto;
             }
         }
 
@@ -915,7 +967,7 @@
 
         @media (max-width: 768px) {
             .community-section__title {
-                margin: 4rem 2rem;
+                margin: 2rem 2rem 1.5rem 2rem;
             }
             
             .community-grid {
@@ -1278,12 +1330,13 @@ Everything you need for the city, and nothing that slows you down.</p>
 
     <section class="video-section">
         <div class="video-section__inner">
-            <div class="video-container">
+            <h3>Watch: The AMX in action</h3>
+            <div class="video">
                 <iframe 
-                    src="https://www.youtube.com/embed/C9t5zI1a6uo" 
+                    src="https://www.youtube.com/embed/C9t5zI1a6uo?rel=0&modestbranding=1&iv_load_policy=3&color=white" 
                     title="Analog Motion eBike Video"
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    loading="lazy"
+                    allow="autoplay; encrypted-media; picture-in-picture; web-share" 
                     allowfullscreen>
                 </iframe>
             </div>
