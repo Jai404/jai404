@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBikes - Analog Motion</title>
+    <link rel="icon" type="image/png" href="Assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Font declarations */
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_extrabold.otf') format('opentype');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Proxima Nova', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 1rem;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-links {
+            position: absolute;
+            right: 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #000;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .logo img {
+            height: 42px;
+            width: auto;
+            display: block;
+            margin-bottom: 0.375rem;
+        }
+
+        .logo-text {
+            font-family: 'Proxima Nova', sans-serif;
+            font-weight: bold;
+            font-size: 0.59rem;
+            letter-spacing: 0.1em;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        /* Main content */
+        main {
+            padding-top: 100px;
+            min-height: 70vh;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: #fff;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            color: #666;
+            padding: 4rem 2rem;
+            text-align: left;
+        }
+
+        .footer-text {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.75rem;
+            font-weight: 300;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .footer-text p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer-text em {
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Content Block Pattern */
+        .content-block-wrapper {
+            background: #fff;
+            padding: 0 2rem;
+        }
+
+        .content-block {
+            display: flex;
+            align-items: center;
+            min-height: 64vh;
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Add reverse modifier for right-to-left layout */
+        .content-block--reverse {
+            flex-direction: row-reverse;
+        }
+
+        .content-block__text {
+            width: 33.33%;
+            padding: 4rem 5rem 4rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .content-block--reverse .content-block__text {
+            padding: 4rem 0 4rem 5rem;
+        }
+
+        .content-block__title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .content-block__body {
+            font-size: 1.125rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-line;
+        }
+
+        .content-block__media {
+            width: 66.67%;
+            height: 64vh;
+            overflow: hidden;
+        }
+
+        .content-block__media img,
+        .content-block__media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-block--extra-spacing {
+            margin-bottom: 4rem;
+        }
+
+        .content-block--road-image img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        /* Carousel styles */
+        .carousel {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carousel__images {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .carousel__track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel__slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel__slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .carousel__nav {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            padding: 1rem 0;
+            background: #fff;
+        }
+
+        .carousel__dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .carousel__dot:hover {
+            background: #999;
+        }
+
+        .carousel__dot.active {
+            background: #000;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content-block,
+            .content-block--reverse {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .content-block__text,
+            .content-block__media {
+                width: 100%;
+            }
+
+            .content-block__text {
+                padding: 3rem 2rem;
+            }
+
+            .content-block__media {
+                height: 50vh;
+            }
+
+            .nav-links {
+                right: 1rem;
+                gap: 1.5rem;
+            }
+            
+            .nav-link {
+                font-size: 0.85rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="Assets/logo_sub.png" alt="Analog Motion">
+                <span class="logo-text">Analog Motion</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="ebikes.html" class="nav-link">eBikes</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Analog Motion eBikes</h1>
+            <p>Lightweight, beautiful, and built for the city</p>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AMX Black Edition</h2>
+                    <p class="content-block__body">The highest-specification Analog Motion eBike with hydraulic disc brakes & Gates CDX belt drive. The Classic features straight handlebars for the most focussed riding position.</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="blackEditionCarousel">
+                        <div class="carousel__images">
+                            <div class="carousel__track">
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/BlackEditionC.jpg" alt="AMX Black Edition">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/BlackEditionS.jpg" alt="AMX Black Edition">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block content-block--reverse">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AMX Stealth</h2>
+                    <p class="content-block__body">Sharing it's specification with the Limited Edition, the Stealth features zero branding and a matt black paint finish to fly under the radar.</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="stealthCarousel">
+                        <div class="carousel__images">
+                    <div class="carousel__track">
+                        <div class="carousel__slide">
+                            <img src="Assets/ebikes/AMXSTEPStealthAcc.jpg" alt="AMX Stealth">
+                        </div>
+                        <div class="carousel__slide">
+                            <img src="Assets/ebikes/AMXStealthCLASSIC.jpg" alt="AMX Stealth">
+                        </div>
+                    </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AMX Limited Edition</h2>
+                    <p class="content-block__body">The first Analog Motion to feature Gates Belt Drive, Schwalbe Kevlar tyres, & integrated lights. The Limited Edition (LE) was available in 2 colourways with a unique fork detail and was exclusively available during the 2020 AMX Indiegogo campaign.</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="limitedEditionCarousel">
+                        <div class="carousel__images">
+                            <div class="carousel__track">
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXLEclassicdb.jpeg" alt="AMX Limited Edition">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXLEclassicpw.jpeg" alt="AMX Limited Edition">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXLEstepdb.jpeg" alt="AMX Limited Edition">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXLEsteppw.jpeg" alt="AMX Limited Edition">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                            <div class="carousel__dot" data-slide="2"></div>
+                            <div class="carousel__dot" data-slide="3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block content-block--reverse">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AMX Mini</h2>
+                    <p class="content-block__body">20" wheels & mini-velo inspired geometry. The Mini is ultra-compact and weighs sub-13kg!</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="miniCarousel">
+                        <div class="carousel__images">
+                            <div class="carousel__track">
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXminiLE.jpeg" alt="AMX Mini">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXminiCity.jpeg" alt="AMX Mini">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMXminiCapital.jpeg" alt="AMX Mini">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                            <div class="carousel__dot" data-slide="2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block content-block--extra-spacing">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AMX Road</h2>
+                    <p class="content-block__body">An eBike with an aggressive riding position for those who want to dig in and pedal hard. Made to order. Less than 20 were ever manufactured.</p>
+                </div>
+                <div class="content-block__media content-block--road-image">
+                    <img src="Assets/ebikes/AMXroad.jpeg" alt="AMX Road">
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block content-block--reverse">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AMX Capital/City</h2>
+                    <p class="content-block__body">The core and original AMX. Signature colours, silver hardware, chain driven. The Capital and City launched the AMX for the AMX Indiegogo campaign.</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="capitalCarousel">
+                        <div class="carousel__images">
+                            <div class="carousel__track">
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMX_CLASSIC_CAPITAL_CB.jpeg" alt="AMX Capital/City">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMX_CLASSIC_CAPITAL_CG.jpeg" alt="AMX Capital/City">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMX_STEP_CAPITAL_CB.jpeg" alt="AMX Capital/City">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AMX_STEP_CAPITAL_CG.jpeg" alt="AMX Capital/City">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                            <div class="carousel__dot" data-slide="2"></div>
+                            <div class="carousel__dot" data-slide="3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AM1+</h2>
+                    <p class="content-block__body">The AM1+ features the same geometry as the AM1 but is 30% more powerful. The AM1+ features Tektro mechanical disc brakes to ensure it stops as well as it goes. The deep-rimmed wheels are available in silver or black with matching hardware.</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="am1PlusCarousel">
+                        <div class="carousel__images">
+                            <div class="carousel__track">
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AM1PLUS.png" alt="AM1+">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AM1STEPPLUS.png" alt="AM1+">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-block-wrapper">
+            <div class="content-block content-block--reverse">
+                <div class="content-block__text">
+                    <h2 class="content-block__title">AM1</h2>
+                    <p class="content-block__body">The AM1 is our entry level e-bike launched in 2018. The progressive frame geometry is inspired by fixed gear track bikes. The 420 mm straight handlebars provide a responsive and agile feel. The deep-rimmed wheels create a clean aerodynamic aesthetic. Finished with silver hardware.</p>
+                </div>
+                <div class="content-block__media">
+                    <div class="carousel" id="am1Carousel">
+                        <div class="carousel__images">
+                            <div class="carousel__track">
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AM1.png" alt="AM1">
+                                </div>
+                                <div class="carousel__slide">
+                                    <img src="Assets/ebikes/AM1STEP.png" alt="AM1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel__nav">
+                            <div class="carousel__dot active" data-slide="0"></div>
+                            <div class="carousel__dot" data-slide="1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-text">
+            <p><em>Disclaimer</em></p>
+            <p>This website is an independent, unofficial tribute to Analog Motion Ltd (company no. 11084148), which entered Creditors' Voluntary Liquidation in 2023. It has been created by the former founders to preserve and share the brand's legacy, product history, and design philosophy for reference and historical interest.</p>
+            <p>The content on this site, including manuals, repair guides, and user-generated materials, is provided for informational and archival purposes only. No guarantee, warranty, or liability of any kind is accepted for the accuracy, completeness, safety, or outcomes of using this information. Any maintenance, repair, or modification is undertaken entirely at your own risk.</p>
+            <p>Images, videos, and social posts attributed to Analog Motion riders are shown for archival and educational purposes. If you are the rights holder of any material displayed here and would prefer it not to appear, please email contentremoval@analogmotion.com and it will be removed promptly.</p>
+            <p>This site is not affiliated with, endorsed by, or a trading continuation of Analog Motion Ltd, its liquidators, or any successor.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carousel functionality for all carousels
+            const carouselIds = [
+                'blackEditionCarousel',
+                'stealthCarousel',
+                'limitedEditionCarousel',
+                'miniCarousel',
+                'capitalCarousel',
+                'am1PlusCarousel',
+                'am1Carousel'
+            ];
+
+            carouselIds.forEach(carouselId => {
+                const carousel = document.getElementById(carouselId);
+                if (carousel) {
+                    const track = carousel.querySelector('.carousel__track');
+                    const dots = carousel.querySelectorAll('.carousel__dot');
+                    const totalSlides = dots.length;
+
+                    function goToSlide(slideIndex) {
+                        track.style.transform = `translateX(-${slideIndex * 100}%)`;
+                        dots.forEach((dot, index) => {
+                            dot.classList.toggle('active', index === slideIndex);
+                        });
+                    }
+
+                    // Dot click handlers
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => {
+                            goToSlide(index);
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Analog Motion</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/png" href="Assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_black.otf') format('opentype');
+            font-weight: 900;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_light.otf') format('opentype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('Assets/Font/proximanova_extrabold.otf') format('opentype');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        body { font-family: 'Proxima Nova', sans-serif; color: #333; line-height: 1.6; background: #fff; }
+
+        /* Header (match ebikes page) */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 1rem;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav { position: relative; max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; position: absolute; right: 2rem; }
+        .nav-link { text-decoration: none; color: #333; font-weight: 500; font-size: 0.95rem; transition: color 0.2s ease; }
+        .nav-link:hover { color: #000; }
+
+        .logo { text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; padding: 0 1rem; }
+        .logo img { height: 42px; width: auto; display: block; margin-bottom: 0.375rem; }
+        .logo-text { font-family: 'Proxima Nova', sans-serif; font-weight: bold; font-size: 0.59rem; letter-spacing: 0.1em; color: #333; text-transform: uppercase; }
+
+        /* Page content */
+        .page-content { padding-top: 6rem; background: #f9f9f9; min-height: 100vh; }
+        .embed-wrapper { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .support-content { background: #fff; padding: 4rem; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; }
+        .support-content h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 2rem; color: #333; }
+        .support-content p { font-size: 1.125rem; margin-bottom: 2rem; color: #666; }
+        .support-link { display: inline-block; padding: 1rem 2rem; background: #333; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 500; transition: all 0.2s ease; }
+        .support-link:hover { background: #000; transform: translateY(-2px); }
+        .support-note { margin-top: 3rem; padding: 1.5rem; background: #f9f9f9; border-radius: 4px; }
+        .support-note p { margin: 0; font-size: 0.95rem; color: #666; }
+
+        /* Footer (match index) */
+        footer { background: #f9f9f9; color: #666; padding: 4rem 2rem; text-align: left; }
+        .footer-text { max-width: 1200px; margin: 0 auto; font-size: 0.75rem; }
+        .footer-text p { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .embed-wrapper { padding: 2rem 1rem; }
+            .support-content { padding: 2rem; }
+            .support-content h1 { font-size: 2rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-link { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo" aria-label="Analog Motion Home">
+                <img src="Assets/logo_sub.png" alt="Analog Motion">
+                <span class="logo-text">Analog Motion</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="ebikes.html" class="nav-link">eBikes</a>
+                <a href="support.html" class="nav-link">Support</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        <div class="embed-wrapper">
+            <div class="support-content">
+                <h1>Support & Documentation</h1>
+                <p>Access our comprehensive support documentation, including manuals, repair guides, and troubleshooting information.</p>
+                <a href="https://nasal-mayflower-32e.notion.site/ebd/06b47461601c4b6db33b2559eaa8fe7e?v=9062ae5141db42a392e4d77314f78b39" 
+                   class="support-link" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    Open Support Documentation →
+                </a>
+                <div class="support-note">
+                    <p><strong>Note:</strong> The support documentation opens in a new tab. If you have any issues accessing the documentation, please try refreshing the page or contact us directly.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-text">
+            <p><em>Disclaimer</em></p>
+            <p>This website is an independent, unofficial tribute to Analog Motion Ltd (company no. 11084148), which entered Creditors' Voluntary Liquidation in 2023. It has been created by the former founders to preserve and share the brand's legacy, product history, and design philosophy for reference and historical interest.</p>
+            <p>The content on this site, including manuals, repair guides, and user-generated materials, is provided for informational and archival purposes only. No guarantee, warranty, or liability of any kind is accepted for the accuracy, completeness, safety, or outcomes of using this information. Any maintenance, repair, or modification is undertaken entirely at your own risk.</p>
+            <p>Images, videos, and social posts attributed to Analog Motion riders are shown for archival and educational purposes. If you are the rights holder of any material displayed here and would prefer it not to appear, please email contentremoval@analogmotion.com and it will be removed promptly.</p>
+            <p>This site is not affiliated with, endorsed by, or a trading continuation of Analog Motion Ltd, its liquidators, or any successor.</p>
+        </div>
+    </footer>
+
+    <script>
+        // No scroll behavior needed - header is always visible like ebikes page
+    </script>
+</body>
+</html>
+
+
