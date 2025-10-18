@@ -60,6 +60,55 @@
         .nav-link { text-decoration: none; color: #333; font-weight: 500; font-size: 0.95rem; transition: color 0.2s ease; }
         .nav-link:hover { color: #000; }
 
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background: #333;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(1) {
+            display: none;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(2) {
+            display: none;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(3) {
+            display: none;
+        }
+
+        .hamburger.active::before {
+            content: '×';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
         .logo { text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; padding: 0 1rem; }
         .logo img { height: 42px; width: auto; display: block; margin-bottom: 0.375rem; }
         .logo-text { font-family: 'Proxima Nova', sans-serif; font-weight: bold; font-size: 0.59rem; letter-spacing: 0.1em; color: #333; text-transform: uppercase; }
@@ -84,8 +133,60 @@
             .embed-wrapper { padding: 2rem 1rem; }
             .support-content { padding: 2rem; }
             .support-content h1 { font-size: 2rem; }
-            .nav-links { gap: 1.5rem; }
-            .nav-link { font-size: 0.85rem; }
+            
+            .hamburger {
+                display: flex;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            /* Ensure nav container doesn't affect centering on mobile */
+            nav {
+                justify-content: center;
+                position: relative;
+            }
+
+            /* Hide desktop nav links on mobile */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: right 0.3s ease;
+                z-index: 1000;
+                opacity: 1;
+                display: none; /* Completely hide on mobile when not active */
+            }
+
+            .nav-links.active {
+                right: 0;
+                display: flex;
+            }
+
+            .nav-link {
+                font-size: 1.5rem;
+                font-weight: 500;
+                color: #333;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .nav-link:hover {
+                color: #000;
+            }
+
+            /* Hide hamburger when nav is open */
+            .nav-links.active ~ .hamburger {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -96,7 +197,12 @@
                 <img src="Assets/logo_sub.png" alt="Analog Motion">
                 <span class="logo-text">Analog Motion</span>
             </a>
-            <div class="nav-links">
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <div class="nav-links" id="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="ebikes.html" class="nav-link">eBikes</a>
                 <a href="support.html" class="nav-link">Support</a>
@@ -133,7 +239,36 @@
     </footer>
 
     <script>
-        // No scroll behavior needed - header is always visible like ebikes page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger menu functionality
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+            // Close menu when clicking on nav links
+            const navLinkElements = document.querySelectorAll('.nav-link');
+            navLinkElements.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
     </script>
 </body>
 </html>
