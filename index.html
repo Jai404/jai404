@@ -189,27 +189,56 @@
         }
 
         .hamburger.active .hamburger-line:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
+            display: none;
         }
 
         .hamburger.active .hamburger-line:nth-child(2) {
-            opacity: 0;
+            display: none;
         }
 
         .hamburger.active .hamburger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
+            display: none;
+        }
+
+        .hamburger.active::before {
+            content: '×';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
         }
 
         header.scrolled .hamburger-line {
             background: #333;
         }
 
+        /* Ensure hamburger is always visible on mobile */
+        @media (max-width: 768px) {
+            .hamburger-line {
+                background: #333 !important;
+            }
+        }
+
         /* Mobile navigation styles */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
             }
 
+            /* Ensure nav container doesn't affect centering on mobile */
+            nav {
+                justify-content: center;
+                position: relative;
+            }
+
+            /* Hide desktop nav links on mobile */
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -224,10 +253,12 @@
                 transition: right 0.3s ease;
                 z-index: 1000;
                 opacity: 1;
+                display: none; /* Completely hide on mobile when not active */
             }
 
             .nav-links.active {
                 right: 0;
+                display: flex;
             }
 
             .nav-link {
