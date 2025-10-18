@@ -45,6 +45,34 @@
 
         body { font-family: 'Proxima Nova', sans-serif; color: #333; line-height: 1.6; background: #fff; }
 
+        /* Link styles for body text */
+        a {
+            color: #666;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #333;
+        }
+
+        /* Override link styles for navigation and buttons */
+        .nav-link,
+        .logo,
+        .cta-button,
+        .support-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-link:hover,
+        .logo:hover,
+        .cta-button:hover,
+        .support-link:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+
         /* Header (match ebikes page) */
         header {
             position: fixed;
