@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analog Motion - Electric Bikes</title>
     <link rel="icon" type="image/png" href="Assets/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preload" href="Assets/Font/proximanova_regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="Assets/Font/proximanova_bold.otf" as="font" type="font/otf" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H65FGJ5GN"></script>
@@ -30,6 +33,7 @@
             src: url('Assets/Font/proximanova_regular.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
+            font-display: swap;
         }
 
         @font-face {
@@ -37,6 +41,7 @@
             src: url('Assets/Font/proximanova_bold.otf') format('opentype');
             font-weight: bold;
             font-style: normal;
+            font-display: swap;
         }
 
         @font-face {
@@ -44,6 +49,7 @@
             src: url('Assets/Font/proximanova_black.otf') format('opentype');
             font-weight: 900;
             font-style: normal;
+            font-display: swap;
         }
 
         @font-face {
@@ -51,6 +57,7 @@
             src: url('Assets/Font/proximanova_light.otf') format('opentype');
             font-weight: 300;
             font-style: normal;
+            font-display: swap;
         }
 
         @font-face {
@@ -58,6 +65,7 @@
             src: url('Assets/Font/proximanova_extrabold.otf') format('opentype');
             font-weight: 800;
             font-style: normal;
+            font-display: swap;
         }
 
         body {
@@ -1226,7 +1234,7 @@
     </header>
 
     <section class="hero">
-        <video class="hero-video" autoplay loop muted playbackRate="0.7">
+        <video class="hero-video" autoplay loop muted playbackRate="0.7" preload="metadata">
             <source src="Assets/AM_Header_Video.mp4" type="video/mp4">
         </video>
         <div class="hero-content" style="position: relative; z-index: 1;">
@@ -1321,7 +1329,7 @@ Analog Motion e-bikes are built on a reductive design process — detachable bat
 Everything you need for the city, and nothing that slows you down.</p>
         </div>
         <div class="content-block__media">
-            <img id="lifestyleImage" src="Assets/placeholder.jpeg" alt="Analog Motion eBike">
+            <img id="lifestyleImage" src="Assets/placeholder.jpeg" alt="Analog Motion eBike" loading="lazy">
         </div>
         </div>
     </section>
